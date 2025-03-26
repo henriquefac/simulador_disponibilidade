@@ -5,7 +5,7 @@ import seaborn as sns
 from src.classes.simulator import Simulator, Recorte
 
 class SimulatorVisualizer():
-    def __init__(self, object_data: Simulator | Recorte):
+    def __init__(self, object_data: Simulator | Recorte, simulacoes = 10000):
         self.data: Simulator | Recorte = object_data
 
     def plot_fixed_availability_curve(self, value_fix: int, flag: bool = False):

@@ -55,7 +55,7 @@ class Operations:
         return (available_servers >= self.k_range).astype(int)
     
 class Simulator(Operations):
-    def __init__(self, n, k_range, p_range, step_k=1, step_p=50, division = "-"):
+    def __init__(self, n, k_range, p_range, step_k=1, step_p=50, division = "-", rounds = 10000):
         super().__init__(n, k_range, p_range, step_k, step_p, division)
         """
         Classe que recebe um número total de servidores (n) e os intervalos de valores para k e p,
@@ -68,12 +68,13 @@ class Simulator(Operations):
             step_k (int): Passo para os valores de k (padrão = 1).
             step_p (float): Passo para os valores de p (padrão: 1.0).
         """
+        self.rounds = rounds
         self.list_stack = None
     
-    def get_server_matrix_disponibility(self, reset=False, rounds=10000):
+    def get_server_matrix_disponibility(self, reset=False):
         if self.list_stack is not None and not reset:
             return self.list_stack
-        self.list_stack = np.stack([self.get_server_matrix_p_k() for _ in range(rounds)])
+        self.list_stack = np.stack([self.get_server_matrix_p_k() for _ in range(self.rounds)])
         return self.list_stack
     
     def get_server_mean_disponibility(self):
